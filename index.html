@@ -1,1 +1,27 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <h2>Messages</h2>
+  <div id="messages"></div>
 
+  <script>
+    async function loadMessages() {
+      const res = await fetch("https://https://hjmvhrdmzdbvmxwgxgtx.supabase.co/rest/v1/messages?select=*",
+        {
+          headers: {
+            apikey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhqbXZocmRtemRidm14d2d4Z3R4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQyNzg4MzksImV4cCI6MjA4OTg1NDgzOX0.YDxI8FD9-bpTJGKQt_4cNZMwwzUz2Pi3_ixhh-OMzTI"
+          }
+        });
+
+      const data = await res.json();
+
+      const container = document.getElementById("messages");
+      container.innerHTML = data.map(m =>
+        `<p><b>${m.username}</b>: ${m.message}</p>`
+      ).join("");
+    }
+
+    loadMessages();
+  </script>
+</body>
+</html>
